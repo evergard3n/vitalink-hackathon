@@ -5,7 +5,7 @@ export default function Page() {
     const data = formContentsPlaceholder;
     return(
         <div >
-            <ol className="grid grid-cols-4 w-full gap-3">
+            <ol className="grid md:grid-cols-4 w-full gap-3">
                 {data.map((form,index)=> (<li key={index}><SingleReceipt form={form} /></li>))}
             </ol>
         </div>

@@ -9,8 +9,8 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="w-full h-screen flex justify-center items-center">
-      <div className="md:w-1/2 md:h-1/2 bg-white rounded-2xl drop-shadow-lg grid grid-cols-2 overflow-hidden">
-        <div className="h-full flex flex-col items-start justify-center px-10 bg-green-400">
+      <div className="md:w-1/2 md:h-1/2 bg-white rounded-2xl drop-shadow-lg grid md:grid-cols-2 overflow-hidden">
+        <div className="h-full min-h-24 flex flex-col items-start justify-center px-10 bg-green-400">
           <div className="flex flex-row items-center">
             <PlusCircleIcon
               width={50}
@@ -24,7 +24,7 @@ export default function Home() {
           <div className="h-full grid grid-cols-2 justify-center items-center p-8 gap-4">
             <Link
               href={"/patients/create"}
-              className="w-full h-full bg-zinc-100  rounded-lg flex flex-col justify-center items-center"
+              className="w-full h-full min-h-36 bg-zinc-100  rounded-lg flex flex-col justify-center items-center"
             >
               <DocumentPlusIcon
                 width={48}
@@ -35,7 +35,7 @@ export default function Home() {
             </Link>
             <Link
               href={"/patients/search"}
-              className="w-full h-full bg-zinc-100  rounded-lg flex flex-col justify-center items-center"
+              className="w-full h-full min-h-36 bg-zinc-100  rounded-lg flex flex-col justify-center items-center"
             >
               <DocumentMagnifyingGlassIcon
                 width={48}
@@ -46,7 +46,7 @@ export default function Home() {
             </Link>
             <Link
               href={"/patients/chatbot"}
-              className="w-full h-full bg-zinc-100  rounded-lg flex flex-col justify-center items-center"
+              className="w-full h-full min-h-36 bg-zinc-100  rounded-lg flex flex-col justify-center items-center"
             >
               <ChatBubbleBottomCenterIcon
                 width={48}
