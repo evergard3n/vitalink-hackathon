@@ -3,7 +3,7 @@ import EditDepartments from "@/app/ui/departments and checkup/editDepartments";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
-export const departments: string[] = [
+const departments: string[] = [
   "Khoa Tai mũi họng",
   "Khoa Tim mạch",
   "Khoa Tâm lý - Tâm thần",
