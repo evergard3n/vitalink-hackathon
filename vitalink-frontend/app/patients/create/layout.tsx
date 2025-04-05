@@ -1,4 +1,4 @@
-import { inter } from "@/app/layout";
+
 import Chatbot from "@/app/ui/chatbot/chatbot";
 import Progress from "@/app/ui/progress";
 
@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="w-full h-20"></div>
         <div className="grow flex flex-col items-start gap-4 lg:relative">
           <h1
-            className={`text-4xl text-center md:text-left md:text-6xl  leading-tight ${inter.className} font-semibold`}
+            className={`text-4xl text-center md:text-left md:text-6xl  leading-tight font-semibold`}
           >
             Đăng ký khám bệnh <br className="hidden lg:block"></br> dễ dàng{" "}
           </h1>
