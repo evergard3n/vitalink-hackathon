@@ -4,9 +4,9 @@ import SearchableDropdown from "./chuyenkhoa";
 
 import { useRouter } from "next/navigation";
 import { useWebSocket } from "@/app/lib/wsContext";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormContents } from "@/app/lib/definitions";
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 function useDebounce(value: any, delay: number) {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
@@ -57,6 +57,7 @@ export default function Form() {
   useEffect(() => {
     const cleanFormData = Object.fromEntries(
       Object.entries(debouncedFormData).filter(
+        /* eslint-disable @typescript-eslint/no-unused-vars */
         ([_, value]) =>
           typeof value === "string" && value !== "" && value !== null
       )
@@ -93,7 +94,7 @@ export default function Form() {
             value={formFields?.name ?? ""}
             placeholder="Nhập họ và tên"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setTouching(true);
+              
               setFormFields({ ...formFields, name: event.target.value });
             }}
             className="w-full h-10 bg-zinc-100 rounded-sm pl-2"
@@ -109,7 +110,7 @@ export default function Form() {
                 placeholder ="Nhập ngày sinh"
                 value={formFields?.dob ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setTouching(true);
+                  
                   setFormFields({ ...formFields, dob: event.target.value });
                 }}
                 className=" w-full h-10 bg-zinc-100 rounded-sm pl-2"
@@ -122,7 +123,7 @@ export default function Form() {
                 id="myDropdown"
                 value={formFields?.gender ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-                  setTouching(true);
+                  
                   setFormFields({ ...formFields, name: event.target.value });
                 }}
                 className="w-full h-10 bg-zinc-100 rounded-sm pl-2"
@@ -144,7 +145,7 @@ export default function Form() {
                 type="text"
                 value={formFields?.phone ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setTouching(true);
+                  
                   setFormFields({ ...formFields, phone: event.target.value });
                 }}
                 className="w-full h-10 bg-zinc-100 rounded-sm pl-2"
@@ -161,7 +162,7 @@ export default function Form() {
                 placeholder="Nhập tình/thành"
                 value={formFields?.province ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setTouching(true);
+                  
                   setFormFields({
                     ...formFields,
                     province: event.target.value,
@@ -179,7 +180,7 @@ export default function Form() {
                 placeholder="Nhập quán/huyện"
                 value={formFields?.district ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setTouching(true);
+                  
                   setFormFields({
                     ...formFields,
                     district: event.target.value,
@@ -197,7 +198,7 @@ export default function Form() {
                 placeholder="Nhập phường/xã"
                 value={formFields?.ward ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setTouching(true);
+                  
                   setFormFields({ ...formFields, ward: event.target.value });
                 }}
                 className=" w-full h-10 bg-zinc-100 rounded-sm pl-2"
@@ -214,7 +215,7 @@ export default function Form() {
                 placeholder="Nhập địa chỉ"
                 value={formFields?.address ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setTouching(true);
+                  
                   setFormFields({ ...formFields, address: event.target.value });
                 }}
                 className=" w-full h-10 bg-zinc-100 rounded-sm pl-2"
@@ -229,7 +230,7 @@ export default function Form() {
               type="text"
               value={formFields?.cccd ?? ""}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setTouching(true);
+                
                 setFormFields({ ...formFields, cccd: event.target.value });
               }}
               className=" w-full h-10 bg-zinc-100 rounded-sm pl-2"

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Poppins, Roboto } from "next/font/google";
+import {  Inter, Poppins, Roboto } from "next/font/google";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";

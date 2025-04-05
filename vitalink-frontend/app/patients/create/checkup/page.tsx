@@ -1,6 +1,6 @@
 import EditCheckups from "@/app/ui/departments and checkup/editCheckups";
 import EditDepartments from "@/app/ui/departments and checkup/editDepartments";
-import { ArrowLeftIcon, PencilIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 export const departments: string[] = [
@@ -9,7 +9,6 @@ export const departments: string[] = [
   "Khoa Tâm lý - Tâm thần",
 ];
 export default function Page() {
-  const dep = departments;
   return (
     <div className="p-4 rounded-lg overflow-hidden grow h-full">
       <div className="w-full h-full bg-white rounded-lg p-8 border-8 border-zinc-100 flex flex-col gap-4">

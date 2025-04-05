@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 
 export default function Page() {
     const [status, setStatus] = useState("Đang kết nối...");
-    const [socket, setSocket] = useState(null);
   
     useEffect(() => {
       const ws = new WebSocket("ws://localhost:5001/api/chat");

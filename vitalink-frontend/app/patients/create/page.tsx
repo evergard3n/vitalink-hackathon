@@ -1,4 +1,4 @@
-import Chatbot from "../../ui/chatbot/chatbot";
+
 import Form from "../../ui/form/form";
 
 export default function Page() {

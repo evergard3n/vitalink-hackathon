@@ -3,7 +3,6 @@ import { Bars3Icon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import NavItem from "./navitem";
 import Link from "next/link";
 import { useState } from "react";
-i
 import {
   SignedOut,
   SignInButton,

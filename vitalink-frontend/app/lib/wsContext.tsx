@@ -11,7 +11,7 @@ interface WebSocketContextType {
   formContent: any;
 }
 
-/* eslint-enable @typescript-eslint/no-explicit-any */
+
 const WebSocketContext = createContext<WebSocketContextType | undefined>(
   undefined
 );

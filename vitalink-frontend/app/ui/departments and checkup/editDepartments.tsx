@@ -4,7 +4,7 @@ import { useState } from "react";
 import SearchableDropdown from "../form/chuyenkhoa";
 
 export default function EditDepartments({departments}: {departments: string[]}) {
-  const [open, setOpen] = useState<Boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
   const [dep, setDep] = useState<string[]>(departments);
   function handleDelete(index: number) {
     setDep(dep.filter((_, i) => i !== index));

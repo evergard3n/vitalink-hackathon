@@ -1,6 +1,5 @@
 'use client'
 import { Chat } from "@/app/lib/definitions";
-import { chatSequence } from "@/app/lib/placeholder";
 import { useEffect, useRef } from "react";
 import Markdown from "react-markdown";
 import { useWebSocket } from "@/app/lib/wsContext";
