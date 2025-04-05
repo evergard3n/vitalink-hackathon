@@ -1,8 +1,7 @@
 "use client";
-import Chatbot from "../chatbot/chatbot";
-import NavBar from "../navbar/navbar";
+
 import SearchableDropdown from "./chuyenkhoa";
-import { inter, poppins } from "@/app/layout";
+
 import { useRouter } from "next/navigation";
 import { useWebSocket } from "@/app/lib/wsContext";
 import { useEffect, useRef, useState } from "react";
@@ -27,8 +26,6 @@ export default function Form() {
   const router = useRouter();
   const chatbotFormData = useWebSocket()?.formContent;
   const sendFormData = useWebSocket()?.sendFormData;
-  const [touching, setTouching] = useState<boolean>(false);
-  const [isTyping, setIsTyping] = useState(false);
 
   const [formFields, setFormFields] = useState<FormContents>({
     id: "",
@@ -48,6 +45,8 @@ export default function Form() {
   });
   const debouncedFormData = useDebounce(formFields, 500);
 
+
+/* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (!chatbotFormData) return;
     if (JSON.stringify(formFields) !== JSON.stringify(chatbotFormData)) {
