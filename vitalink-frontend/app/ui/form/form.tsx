@@ -124,7 +124,7 @@ export default function Form() {
                 value={formFields?.gender ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
                   
-                  setFormFields({ ...formFields, name: event.target.value });
+                  setFormFields({ ...formFields, gender: event.target.value });
                 }}
                 className="w-full h-10 bg-zinc-100 rounded-sm pl-2"
               >
