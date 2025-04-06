@@ -1,8 +1,11 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import { Chat } from "./definitions";
-
+import { useUser } from "@clerk/nextjs";
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+
+
 interface WebSocketContextType {
   socket: WebSocket | null;
   messages: Chat[] | undefined;
@@ -16,7 +19,7 @@ const WebSocketContext = createContext<WebSocketContextType | undefined>(
   undefined
 );
 
-export const WebSocketProvider = ({
+export const  WebSocketProvider = ({
   children,
 }: {
   children: React.ReactNode;
@@ -24,21 +27,32 @@ export const WebSocketProvider = ({
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [messages, setMessages] = useState<Chat[]>([]);
   const [formContent, setFormContent] = useState();
+  const { user } =  useUser();
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:5001/api/chat");
+    if(!user) return;
+    const getMessages = async () => {
+      const response = await fetch(`http://${process.env.NEXT_PUBLIC_BACKEND_URL}/api/history/${user.id}`);
+      if(!response) return;
+      const data = await response.json();
+      if(!data.chat_history) return;
+      setMessages(data.chat_history);
+
+    }
+    getMessages();
+  },[user])
+  useEffect(() => {
+    const ws = new WebSocket(`ws://${process.env.NEXT_PUBLIC_BACKEND_URL}/api/chat`);
 
     ws.onopen = () => console.log("🟢 WebSocket đã kết nối!");
-    ws.onclose = () => console.log("🔴 WebSocket mất kết nối!");
+    ws.onclose = () => console.log(`🔴 WebSocket mất kết nối! ${process.env.NEXT_PUBLIC_BACKEND_URL}`);
     ws.onerror = (error) => console.error("⚠️ WebSocket error:", error);
 
     ws.onmessage = (event) => {
       const response = JSON.parse(event.data);
       if(response.reply && response.reply !== "Cập nhật form thành công.") {
         const newMessage: Chat = {
-          id: Date.now().toString(),
           message: response.reply,
           sender: "BOT",
-          timestamp: new Date().toISOString(),
         };
         setMessages((prev) => [...prev, newMessage]);
         setFormContent(response.form);
@@ -59,13 +73,11 @@ export const WebSocketProvider = ({
   function sendMessage(message: string) {
     if (socket && socket.readyState === WebSocket.OPEN) {
       const chatMessage: Chat = {
-        id: Date.now().toString(),
         sender: "User",
         message: message,
-        timestamp: new Date().toISOString(),
       };
 
-      socket.send(JSON.stringify({ type: "chat", message: message }));
+      socket.send(JSON.stringify({ type: "chat", message: message, user_id : user?.id}));
       setMessages((prev) => [...prev, chatMessage]);
     } else {
       console.warn("⚠️ WebSocket chưa sẵn sàng!");

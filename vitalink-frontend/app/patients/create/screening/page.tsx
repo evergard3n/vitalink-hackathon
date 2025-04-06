@@ -24,7 +24,7 @@ export default function Page() {
         <h1 className="md:text-4xl font-bold pt-4 mb-2">Thông tin sàng lọc</h1>
         <div className="bg-green-400 w-1/4 h-0.5 mb-4"></div>
         <p>Vui lòng trả lời đầy đủ các câu hỏi dưới đây.</p>
-        <form action="" className="flex flex-col items-start w-full gap-4 mt-6">
+        <form action="" onSubmit={handleSubmit} className="flex flex-col items-start w-full gap-4 mt-6">
           <label htmlFor="position">Vị trí xuất hiện cơn đau?</label>
           <input
             type="text"

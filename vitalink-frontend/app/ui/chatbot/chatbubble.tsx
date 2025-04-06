@@ -18,6 +18,7 @@ function BotBubble({chat}: {chat: Chat}) {
     )
 }
 export default function ChatBubbles() {
+
     const olRef = useRef<HTMLOListElement>(null)
     useEffect(() => {
         const olElement = olRef.current;
@@ -32,7 +33,7 @@ export default function ChatBubbles() {
         <div className=" ">
             <ol className="h-96 w-full flex flex-col items-end px-4 py-2 gap-4 overflow-y-auto" ref={olRef}>
                 {data.map((chat,index) => {
-                    if(chat.sender === "BOT") {
+                    if(chat.sender === "BOT" || chat.sender === "Bot") {
                         return (
                             <li key={index}><BotBubble chat = {chat} /></li>
                         )
