@@ -31,7 +31,7 @@ export const  WebSocketProvider = ({
   useEffect(() => {
     if(!user) return;
     const getMessages = async () => {
-      const response = await fetch(`http://${process.env.NEXT_PUBLIC_BACKEND_URL}/api/history/${user.id}`);
+      const response = await fetch(`https://${process.env.NEXT_PUBLIC_BACKEND_URL}/api/history/${user.id}`);
       if(!response) return;
       const data = await response.json();
       if(!data.chat_history) return;
@@ -41,7 +41,7 @@ export const  WebSocketProvider = ({
     getMessages();
   },[user])
   useEffect(() => {
-    const ws = new WebSocket(`ws://${process.env.NEXT_PUBLIC_BACKEND_URL}/api/chat`);
+    const ws = new WebSocket(`wss://${process.env.NEXT_PUBLIC_BACKEND_URL}/api/chat`);
 
     ws.onopen = () => console.log("🟢 WebSocket đã kết nối!");
     ws.onclose = () => console.log(`🔴 WebSocket mất kết nối! ${process.env.NEXT_PUBLIC_BACKEND_URL}`);
