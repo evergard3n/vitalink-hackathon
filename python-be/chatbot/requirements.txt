@@ -1,0 +1,6 @@
+fastapi[standard]
+pydantic
+openai
+python-dotenv
+uuid
+pymongo
