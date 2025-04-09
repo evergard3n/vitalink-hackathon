@@ -21,7 +21,7 @@ export default function ChatBox() {
     setText("");
   }
   return (
-    <div className="bg-zinc-100 w-[95%] bottom-5 rounded-lg p-2 mb-3">
+    <div className="bg-zinc-100 w-full bottom-5 rounded-lg p-2 mb-3">
       <form action="" onSubmit={handleSubmit} className="relative w-full h-fit flex flex-col">
         <textarea
           ref={textareaRef}

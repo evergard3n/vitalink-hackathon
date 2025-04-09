@@ -8,7 +8,7 @@ import ChatBubbles from "./chatbubble";
 import { useState } from "react";
 
 export default function Chatbot() {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(true);
   if (open) {
     return (
       <div className="bg-white rounded-lg w-96 flex flex-col items-center overflow-hidden absolute lg:-bottom-10 lg:left-0 z-50 -right-3 bottom-0  drop-shadow-sm">

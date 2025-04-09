@@ -33,6 +33,8 @@ export const  WebSocketProvider = ({
     const getMessages = async () => {
       const response = await fetch(`https://${process.env.NEXT_PUBLIC_BACKEND_URL}/api/history/${user.id}`);
       if(!response) return;
+      console.log(response);
+      
       const data = await response.json();
       if(!data.chat_history) return;
       setMessages(data.chat_history);
@@ -41,8 +43,8 @@ export const  WebSocketProvider = ({
     getMessages();
   },[user])
   useEffect(() => {
-    const ws = new WebSocket(`wss://${process.env.NEXT_PUBLIC_BACKEND_URL}/api/chat`);
-
+    // const ws = new WebSocket(`wss://${process.env.NEXT_PUBLIC_BACKEND_URL}/api/chat`);
+    const ws = new WebSocket(`wss://vitalink-9uk0.onrender.com/api/chat`);
     ws.onopen = () => console.log("🟢 WebSocket đã kết nối!");
     ws.onclose = () => console.log(`🔴 WebSocket mất kết nối! ${process.env.NEXT_PUBLIC_BACKEND_URL}`);
     ws.onerror = (error) => console.error("⚠️ WebSocket error:", error);

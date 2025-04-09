@@ -11,7 +11,7 @@ const departments: string[] = [
 export default function Page() {
   return (
     <div className="p-4 rounded-lg overflow-hidden grow h-full">
-      <div className="w-full h-full bg-white rounded-lg p-8 border-8 border-zinc-100 flex flex-col gap-4">
+      <div className="w-full h-full bg-white rounded-lg p-8 border-4 border-zinc-100 flex flex-col gap-4">
         <Link
           href={"/patients/create"}
           className="flex flex-row items-center gap-2"

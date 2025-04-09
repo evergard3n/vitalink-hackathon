@@ -12,7 +12,7 @@ function UserBubble({chat}: {chat: Chat}) {
 }
 function BotBubble({chat}: {chat: Chat}) {
     return (
-        <div className="h-fit min-w-full text-left self-start">
+        <div className="h-fit min-w-full w-ful text-left">
             <Markdown>{chat.message}</Markdown>
         </div>
     )
@@ -30,8 +30,8 @@ export default function ChatBubbles() {
     const message = useWebSocket()?.messages;
     const data = message || [];
     return (
-        <div className=" ">
-            <ol className="h-96 w-full flex flex-col items-end px-4 py-2 gap-4 overflow-y-auto" ref={olRef}>
+        <div className="grow">
+            <ol className="h-96 w-full flex flex-col items-start px-4 py-2 gap-4 overflow-y-auto" ref={olRef}>
                 {data.map((chat,index) => {
                     if(chat.sender === "BOT" || chat.sender === "Bot") {
                         return (
