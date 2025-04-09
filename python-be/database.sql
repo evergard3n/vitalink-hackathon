@@ -141,7 +141,7 @@ VALUES
 ('Chụp CT bụng', 'Nhịn ăn 4 giờ. Có thể cần thuốc cản quang', 'Dị ứng với thuốc cản quang, vấn đề về thận', 30, 1800000, 7, 4);
 
 -- Cuộc hẹn khám
-INSERT INTO Appointments (patient_id, doctor_id, test_type_id, department_id, location_id, appointment_date, appointment_time, reason, status, notes)
+INSERT INTO appointments (patient_id, doctor_id, test_type_id, department_id, location_id, appointment_date, appointment_time, reason, status, notes)
 VALUES 
 -- Cuộc hẹn của bệnh nhân 1 (cả khám bác sĩ và xét nghiệm)
 (1, 1, NULL, 1, 1, '2025-04-10', '09:00:00', 'Khám tim định kỳ', 'Đã lên lịch', 'Tái khám từ lần trước'),

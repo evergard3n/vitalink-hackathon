@@ -18,9 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </div>
-      <div className="w-fit h-full hidden md:block">
-        <ChatPanel />
-      </div>
+      <ChatPanel />
       <div className="grow">
       {children}
       </div>
