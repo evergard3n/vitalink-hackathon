@@ -45,8 +45,7 @@ export default function Form() {
   });
   const debouncedFormData = useDebounce(formFields, 500);
 
-
-/* eslint-disable react-hooks/exhaustive-deps */
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (!chatbotFormData) return;
     if (JSON.stringify(formFields) !== JSON.stringify(chatbotFormData)) {
@@ -83,10 +82,12 @@ export default function Form() {
           className="flex flex-col gap-2 w-full grow"
         >
           <h1 className="text-left font-semibold text-4xl">
-            Thông tin cá nhân 
+            Thông tin cá nhân
           </h1>
           <div className="h-0.5 w-1/4 bg-green-400 mb-4"></div>
-          <label htmlFor="name">Họ và tên <span className="text-red-700">*</span> </label>
+          <label htmlFor="name">
+            Họ và tên <span className="text-red-700">*</span>{" "}
+          </label>
           <input
             required
             type="text"
@@ -94,7 +95,6 @@ export default function Form() {
             value={formFields?.name ?? ""}
             placeholder="Nhập họ và tên"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              
               setFormFields({ ...formFields, name: event.target.value });
             }}
             className="w-full h-10 bg-zinc-100 rounded-sm pl-2"
@@ -102,28 +102,30 @@ export default function Form() {
 
           <div className="grid md:grid-cols-3 w-full gap-4">
             <div className="flex flex-col gap-2 ">
-              <label htmlFor="birth">Ngày sinh <span className="text-red-700">*</span> </label>
+              <label htmlFor="birth">
+                Ngày sinh <span className="text-red-700">*</span>{" "}
+              </label>
               <input
                 type="text"
                 id="birth"
                 required
-                placeholder ="Nhập ngày sinh"
+                placeholder="Nhập ngày sinh"
                 value={formFields?.dob ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  
                   setFormFields({ ...formFields, dob: event.target.value });
                 }}
                 className=" w-full h-10 bg-zinc-100 rounded-sm pl-2"
               />
             </div>
             <div className="flex flex-col gap-2 ">
-              <label htmlFor="myDropdown">Giới tính <span className="text-red-700">*</span></label>
+              <label htmlFor="myDropdown">
+                Giới tính <span className="text-red-700">*</span>
+              </label>
               <select
                 required
                 id="myDropdown"
                 value={formFields?.gender ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-                  
                   setFormFields({ ...formFields, gender: event.target.value });
                 }}
                 className="w-full h-10 bg-zinc-100 rounded-sm pl-2"
@@ -137,7 +139,9 @@ export default function Form() {
               </select>
             </div>
             <div className="flex flex-col gap-2 ">
-              <label htmlFor="phone">Số điện thoại <span className="text-red-700">*</span></label>
+              <label htmlFor="phone">
+                Số điện thoại <span className="text-red-700">*</span>
+              </label>
               <input
                 id="phone"
                 required
@@ -145,7 +149,6 @@ export default function Form() {
                 type="text"
                 value={formFields?.phone ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  
                   setFormFields({ ...formFields, phone: event.target.value });
                 }}
                 className="w-full h-10 bg-zinc-100 rounded-sm pl-2"
@@ -154,7 +157,9 @@ export default function Form() {
           </div>
           <div className="grid md:grid-cols-3 w-full gap-4">
             <div className="flex flex-col gap-2 ">
-              <label htmlFor="province">Tỉnh/Thành <span className="text-red-700">*</span></label>
+              <label htmlFor="province">
+                Tỉnh/Thành <span className="text-red-700">*</span>
+              </label>
               <input
                 type="text"
                 id="province"
@@ -162,7 +167,6 @@ export default function Form() {
                 placeholder="Nhập tình/thành"
                 value={formFields?.province ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  
                   setFormFields({
                     ...formFields,
                     province: event.target.value,
@@ -172,7 +176,9 @@ export default function Form() {
               />
             </div>
             <div className="flex flex-col gap-2 ">
-              <label htmlFor="district">Quận/Huyện <span className="text-red-700">*</span></label>
+              <label htmlFor="district">
+                Quận/Huyện <span className="text-red-700">*</span>
+              </label>
               <input
                 type="text"
                 id="district"
@@ -180,7 +186,6 @@ export default function Form() {
                 placeholder="Nhập quán/huyện"
                 value={formFields?.district ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  
                   setFormFields({
                     ...formFields,
                     district: event.target.value,
@@ -190,7 +195,9 @@ export default function Form() {
               />
             </div>
             <div className="flex flex-col gap-2 ">
-              <label htmlFor="ward">Xã/Phường <span className="text-red-700">*</span></label>
+              <label htmlFor="ward">
+                Xã/Phường <span className="text-red-700">*</span>
+              </label>
               <input
                 type="text"
                 id="ward"
@@ -198,7 +205,6 @@ export default function Form() {
                 placeholder="Nhập phường/xã"
                 value={formFields?.ward ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  
                   setFormFields({ ...formFields, ward: event.target.value });
                 }}
                 className=" w-full h-10 bg-zinc-100 rounded-sm pl-2"
@@ -207,7 +213,9 @@ export default function Form() {
           </div>
           <div className="grid md:grid-cols-2 gap-4 w-full">
             <div className="flex flex-col gap-2">
-              <label htmlFor="address">Địa chỉ <span className="text-red-700">*</span></label>
+              <label htmlFor="address">
+                Địa chỉ <span className="text-red-700">*</span>
+              </label>
               <input
                 id="address"
                 required
@@ -215,26 +223,26 @@ export default function Form() {
                 placeholder="Nhập địa chỉ"
                 value={formFields?.address ?? ""}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  
                   setFormFields({ ...formFields, address: event.target.value });
                 }}
                 className=" w-full h-10 bg-zinc-100 rounded-sm pl-2"
               />
             </div>
             <div className="flex flex-col gap-2">
-            <label htmlFor="address">Số CMTND/CCCD <span className="text-red-700">*</span></label>
-            <input
-              id="cccd"
-              required
-              placeholder="Nhập số CMTND/CCCD"
-              type="text"
-              value={formFields?.cccd ?? ""}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                
-                setFormFields({ ...formFields, cccd: event.target.value });
-              }}
-              className=" w-full h-10 bg-zinc-100 rounded-sm pl-2"
-            />
+              <label htmlFor="address">
+                Số CMTND/CCCD <span className="text-red-700">*</span>
+              </label>
+              <input
+                id="cccd"
+                required
+                placeholder="Nhập số CMTND/CCCD"
+                type="text"
+                value={formFields?.cccd ?? ""}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setFormFields({ ...formFields, cccd: event.target.value });
+                }}
+                className=" w-full h-10 bg-zinc-100 rounded-sm pl-2"
+              />
             </div>
           </div>
           <h1 className="text-left font-semibold text-4xl pt-8 pb-2">
@@ -242,8 +250,18 @@ export default function Form() {
           </h1>
           <div className="h-0.5 w-1/6 bg-green-400 mb-4"></div>
           <label>Chuyên khoa</label>
-          <SearchableDropdown />
-          <label htmlFor="trieuchung">Mô tả triệu chứng <span className="text-red-700">*</span></label>
+          <SearchableDropdown
+            options={[
+              "Khoa tim mạch",
+              "Khoa Thần kinh",
+              "Khoa Chỉnh hình",
+              "Khoa Chẩn đoán hình ảnh",
+              "Khoa Xét nghiệm",
+            ]}
+          />
+          <label htmlFor="trieuchung">
+            Mô tả triệu chứng <span className="text-red-700">*</span>
+          </label>
           <textarea
             id="trieuchung"
             required

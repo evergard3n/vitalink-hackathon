@@ -35,7 +35,7 @@ export default function Page() {
           thực hiện:
         </p>
         <EditCheckups
-          checkups={["Xét nghiệm máu", "Xét nghiệm nước tiểu", "Chụp X-Quang"]}
+          checkups={["Công thức máu toàn phần"]}
         />
         <Link
           href={"/patients/create/date-select"}

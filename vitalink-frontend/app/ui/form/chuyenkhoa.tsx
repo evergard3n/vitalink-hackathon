@@ -1,8 +1,14 @@
 'use client'
 import { useState } from "react";
+const departments = [
+  "Khoa tim mạch",
+  "Khoa Thần kinh",
+  "Khoa Chỉnh hình",
+  "Khoa Chẩn đoán hình ảnh",
+  "Khoa Xét nghiệm"
+]
 
-export default function SearchableDropdown() {
-  const options = ["Nam", "Nữ", "Khác", "Không muốn tiết lộ"];
+export default function SearchableDropdown({options}: {options: string[]}) {
   const [search, setSearch] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,7 +30,7 @@ export default function SearchableDropdown() {
         name="chuyenkhoa"
         onFocus={() => setIsOpen(true)}
         className="w-full h-10 bg-zinc-100 rounded-sm pl-2"
-        placeholder="Chọn chuyên khoa..."
+        placeholder="Chọn..."
       />
       {isOpen && filteredOptions.length > 0 && (
         <ul className="absolute w-full mt-1 bg-white border border-zinc-200 rounded-lg shadow-md">

@@ -3,7 +3,11 @@ import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import SearchableDropdown from "../form/chuyenkhoa";
 
-export default function EditDepartments({departments}: {departments: string[]}) {
+export default function EditDepartments({
+  departments,
+}: {
+  departments: string[];
+}) {
   const [open, setOpen] = useState<boolean>(false);
   const [dep, setDep] = useState<string[]>(departments);
   function handleDelete(index: number) {
@@ -55,9 +59,9 @@ export default function EditDepartments({departments}: {departments: string[]}) 
               {dep.map((department, index) => (
                 <li
                   key={index}
-                  className="border border-zinc-200 rounded-md h-fit overflow-hidden max-h-24 min-h-18 flex items-center justify-between font-bold text-xl "
+                  className="border border-zinc-200 rounded-md h-fit overflow-hidden max-h-22 min-h-18 flex items-center justify-between font-bold text-md "
                 >
-                  <p className="mx-auto">{department}</p>
+                  <p className="mx-auto px-2">{department}</p>
                   <button
                     className="w-12 hover:w-18 transition-all duration-150 ease-in h-68 bg-red-700"
                     onClick={() => handleDelete(index)}
@@ -77,7 +81,15 @@ export default function EditDepartments({departments}: {departments: string[]}) 
               onSubmit={handleAddNewDept}
               className="flex flex-row gap-1"
             >
-              <SearchableDropdown />
+              <SearchableDropdown
+                options={[
+                  "Khoa tim mạch",
+                  "Khoa Thần kinh",
+                  "Khoa Chỉnh hình",
+                  "Khoa Chẩn đoán hình ảnh",
+                  "Khoa Xét nghiệm",
+                ]}
+              />
               <button
                 type="submit"
                 className="px-4 py-2 w-fit h-10 border border-zinc-200  hover:bg-zinc-200 rounded-lg transition-colors duration-150 ease-in"
