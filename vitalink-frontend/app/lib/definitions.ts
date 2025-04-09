@@ -19,3 +19,23 @@ export interface FormContents {
     dateCreated: string,
     cccd: string,
 }
+
+export interface Appointment {
+    appointment_id: number,
+    created_at: string,
+    updated_at: string,
+    patient_id: number,
+    doctor_id: number,
+    test_type_id: number,
+    department_id: number,
+    location_id: number,
+    appointment_date: string,
+    appointment_time: string,
+    reason: string,
+    status: string,
+    notes: string
+}
+export interface AllAppointments {
+    total: number,
+    items: Appointment[]
+}
