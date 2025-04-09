@@ -1,6 +1,9 @@
 # Vitalink Backend
 ## Step 1: Set Up the Database
 Create your database by python-be/database.sql and set your database_name is "vitalink"
+```psql -U postgres -h localhost -d vitalink -f database.sql
+```
+
 ## Step 2:  Set Up the Python Environment
 It's recommended to use a virtual environment:
 ```python
