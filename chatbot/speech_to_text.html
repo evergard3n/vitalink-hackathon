@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhận dạng giọng nói tiếng Việt</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      #status {
+        font-weight: bold;
+        color: red;
+      }
+      #status.connected {
+        color: green;
+      }
+      #transcript {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        min-height: 100px;
+        background-color: #f9f9f9;
+      }
+      button {
+        padding: 10px 15px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      button:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+      }
+      .controls {
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Nhận dạng giọng nói tiếng Việt</h1>
+    <p>Trạng thái: <span id="status">Chưa kết nối</span></p>
+    
+    <div class="controls">
+      <button id="startButton">Bắt đầu ghi âm</button>
+      <button id="stopButton" disabled>Dừng ghi âm</button>
+    </div>
+    
+    <h2>Văn bản nhận dạng:</h2>
+    <div id="transcript"></div>
+    
+    <script>
+      const startButton = document.getElementById('startButton');
+      const stopButton = document.getElementById('stopButton');
+      const statusElement = document.getElementById('status');
+      const transcriptElement = document.getElementById('transcript');
+      
+      let mediaRecorder;
+      let socket;
+      let stream;
+      
+      startButton.addEventListener('click', startRecording);
+      stopButton.addEventListener('click', stopRecording);
+      
+      async function startRecording() {
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          
+          if (!MediaRecorder.isTypeSupported('audio/webm')) {
+            alert('Trình duyệt của bạn không hỗ trợ định dạng âm thanh này');
+            return;
+          }
+          
+          mediaRecorder = new MediaRecorder(stream, {
+            mimeType: 'audio/webm',
+          });
+          
+          // Tạo kết nối WebSocket đến Deepgram API
+          // Lưu ý: Bạn nên thay thế API key bằng key của riêng bạn
+          socket = new WebSocket('wss://api.deepgram.com/v1/listen?language=vi&model=nova-2', [
+            'token',
+            'fbd203b05ce4e9871c10e60b35b03016dd8274ee',
+          ]);
+          
+          socket.onopen = () => {
+            statusElement.textContent = 'Đã kết nối';
+            statusElement.className = 'connected';
+            
+            mediaRecorder.addEventListener('dataavailable', async (event) => {
+              if (event.data.size > 0 && socket.readyState === 1) {
+                socket.send(event.data);
+              }
+            });
+            
+            mediaRecorder.start(1000);
+            startButton.disabled = true;
+            stopButton.disabled = false;
+          };
+          
+          socket.onmessage = (message) => {
+            const received = JSON.parse(message.data);
+            const transcript = received.channel.alternatives[0].transcript;
+            
+            if (transcript && received.is_final) {
+              console.log(transcript);
+              transcriptElement.innerHTML += transcript + ' ';
+            }
+          };
+          
+          socket.onclose = () => {
+            console.log('WebSocket đã đóng');
+            statusElement.textContent = 'Đã ngắt kết nối';
+            statusElement.className = '';
+          };
+          
+          socket.onerror = (error) => {
+            console.error('Lỗi WebSocket:', error);
+            statusElement.textContent = 'Lỗi kết nối';
+            statusElement.className = '';
+          };
+        } catch (error) {
+          console.error('Lỗi:', error);
+          alert('Không thể truy cập microphone. Vui lòng kiểm tra quyền truy cập.');
+        }
+      }
+      
+      function stopRecording() {
+        if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+          mediaRecorder.stop();
+        }
+        
+        if (socket && socket.readyState === 1) {
+          socket.close();
+        }
+        
+        if (stream) {
+          stream.getTracks().forEach(track => track.stop());
+        }
+        
+        startButton.disabled = false;
+        stopButton.disabled = true;
+        statusElement.textContent = 'Đã ngắt kết nối';
+        statusElement.className = '';
+      }
+    </script>
+  </body>
+</html>
