@@ -4,7 +4,7 @@ import Progress from "@/app/ui/progress";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-full lg:flex lg:flex-row flex flex-col relative">
+    <div className="w-full  flex flex-col lg:flex-row relative">
       <div className="lg:hidden  flex flex-col items-start justify-between h-full px-16 gap-8 w-full">
         <div className="grow flex flex-col items-start gap-4 lg:relative">
           <div className="md:block hidden">

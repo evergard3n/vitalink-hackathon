@@ -34,9 +34,9 @@ export default function NavBar() {
     setIsOpen(false); // Close the menu on pathname change
   }, [pathname]);
   return (
-    <div className="w-full md:w-40 z-20 h-18 lg:h-fit relative bg-white drop-shadow-xs transition-all duration-200 ease-in backdrop-blur-sm min-h-12 md:border border-b border-zinc-200 flex flex-row md:rounded-lg items-center gap-8  px-4">
+    <div className="w-full lg:w-40 z-20 h-18 lg:h-fit fixed lg:relative bg-white drop-shadow-xs transition-all duration-200 ease-in backdrop-blur-sm min-h-12 md:border border-b border-zinc-200 flex flex-row md:rounded-lg items-center gap-8 px-4">
       <div className="flex flex-row lg:flex-col lg:py-6 justify-between md:justify-center w-full items-center gap-8">
-        <button className="block md:hidden scale-125">
+        <button className="block lg:hidden scale-125">
           <Bars3Icon
             width={16}
             height={16}
@@ -45,7 +45,7 @@ export default function NavBar() {
             }}
           />
         </button>
-        <Link href={"/"} className="flex flex-row items-center justify-center  w-full">
+        <Link href={"/"} className="flex flex-row items-center justify-center  w-full grow">
           <PlusCircleIcon width={36} height={36} />
           <h1 className="text-2xl font-black">VitaLink</h1>
         </Link>
@@ -58,12 +58,12 @@ export default function NavBar() {
             </ol>
           </div>
         )}
-        <ol className=" hidden md:flex flex-col md:justify-center items-start gap-12 ">
+        <ol className=" hidden lg:flex flex-col md:justify-center items-start gap-12 ">
           {navItems.map((item) => (
             <NavItem key={item.href} href={item.href} name={item.name} />
           ))}
         </ol>
-        <div className="scale-125 flex flex-row items-center justify-center md:border-t md:border-zinc-200 md:w-full md:pt-4 ">
+        <div className="scale-125 flex flex-row items-center justify-center lg:border-t lg:border-zinc-200 lg:w-full lg:pt-4 ">
           <SignedOut>
             <SignInButton />
             <SignUpButton />

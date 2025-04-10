@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useWebSocket } from "@/app/lib/wsContext";
 import { useEffect, useState } from "react";
 import { FormContents } from "@/app/lib/definitions";
+import { useFormContext } from "@/app/lib/formContext";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function useDebounce(value: any, delay: number) {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -23,6 +24,7 @@ function useDebounce(value: any, delay: number) {
   return debouncedValue;
 }
 export default function Form() {
+  const formContext = useFormContext();
   const router = useRouter();
   const chatbotFormData = useWebSocket()?.formContent;
   const sendFormData = useWebSocket()?.sendFormData;
@@ -71,6 +73,7 @@ export default function Form() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
     console.log(data);
+    formContext?.updateFormData({reason : formFields.symptoms})
     router.push("/patients/create/checkup");
   }
   return (

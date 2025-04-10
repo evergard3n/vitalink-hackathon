@@ -1,15 +1,22 @@
 "use client";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchableDropdown from "../form/chuyenkhoa";
+import { useFormContext } from "@/app/lib/formContext";
 
 export default function EditDepartments({
   departments,
 }: {
   departments: string[];
 }) {
+  const formDataContext = useFormContext();
   const [open, setOpen] = useState<boolean>(false);
   const [dep, setDep] = useState<string[]>(departments);
+  useEffect(() => {
+    formDataContext?.updateFormData({
+      department_id: dep[0],
+    });
+  }, []);
   function handleDelete(index: number) {
     setDep(dep.filter((_, i) => i !== index));
   }
@@ -22,6 +29,9 @@ export default function EditDepartments({
     }
   }
   function handleSubmit() {
+    formDataContext?.updateFormData({
+      department_id: dep[0],
+    });
     setOpen(false);
   }
   function handleClose() {
@@ -55,7 +65,7 @@ export default function EditDepartments({
             <h1 className="text-center text-2xl font-bold">
               Chỉnh sửa chuyên khoa
             </h1>
-            <ol className="grid grid-cols-2 gap-4 pt-4">
+            <ol className="grid lg:grid-cols-2 gap-4 pt-4">
               {dep.map((department, index) => (
                 <li
                   key={index}

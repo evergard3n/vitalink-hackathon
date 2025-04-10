@@ -41,7 +41,7 @@ export default function Page() {
           href={"/patients/create/date-select"}
           className="bg-blue-500 hover:bg-blue-400 transition-colors duration-150 ease-in w-fit px-4 py-2 text-white rounded-lg ml-auto mt-auto"
         >
-          Tiếp tục{" "}
+          Tiếp tục
         </Link>
       </div>
     </div>

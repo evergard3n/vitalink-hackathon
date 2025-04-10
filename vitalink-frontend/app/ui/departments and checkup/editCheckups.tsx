@@ -1,11 +1,18 @@
 "use client";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchableDropdown from "../form/chuyenkhoa";
+import { useFormContext } from "@/app/lib/formContext";
 
 export default function EditCheckups({ checkups }: { checkups: string[] }) {
+  const formDataContext = useFormContext();
   const [open, setOpen] = useState<boolean>(false);
   const [dep, setDep] = useState<string[]>(checkups);
+  useEffect(() => {
+    formDataContext?.updateFormData({
+      test_type_id: dep[0],
+    });
+  },[]);
   function handleDelete(index: number) {
     setDep(dep.filter((_, i) => i !== index));
   }
@@ -18,6 +25,9 @@ export default function EditCheckups({ checkups }: { checkups: string[] }) {
     }
   }
   function handleSubmit() {
+    formDataContext?.updateFormData({
+      test_type_id: dep[0],
+    });
     setOpen(false);
   }
   function handleClose() {
