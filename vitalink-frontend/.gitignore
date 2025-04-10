@@ -45,3 +45,4 @@ next-env.d.ts
 
 .conda/
 __pycache__/
+.pyc
