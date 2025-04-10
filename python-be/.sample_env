@@ -3,3 +3,5 @@ POSTGRES_USER = "postgres"
 POSTGRES_PASSWORD = "postgres"
 POSTGRES_DB = "vitalink"
 POSTGRES_PORT =  "5432"
+
+DEEPGRAM_API_KEY = "your_api_key"
