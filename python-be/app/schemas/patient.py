@@ -3,6 +3,7 @@ from datetime import date, datetime
 from pydantic import BaseModel
 
 class PatientBase(BaseModel):
+    patient_id:int
     full_name: str
     gender: Optional[str] = None
     date_of_birth: Optional[date] = None
