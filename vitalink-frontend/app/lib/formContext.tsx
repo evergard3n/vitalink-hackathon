@@ -2,7 +2,7 @@
 'use client'
 import { createContext, useContext, useState } from "react";
 
-interface FormDataType {
+export interface FormDataType {
     test_type_id: string;
     appointment_date: string;
     reason: string;

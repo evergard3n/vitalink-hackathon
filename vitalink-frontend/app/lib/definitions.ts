@@ -39,3 +39,16 @@ export interface AllAppointments {
     total: number,
     items: Appointment[]
 }
+
+export interface Patient {
+    patient_id: number,
+    full_name: string,
+    gender: string,
+    date_of_birth: string,
+    ethnicity: string,
+    occupation: string,
+    address: string,
+    phone_number: string,
+    created_at: string,
+    updated_at: string
+}

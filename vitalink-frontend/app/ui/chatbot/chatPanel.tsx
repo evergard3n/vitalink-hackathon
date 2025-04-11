@@ -8,11 +8,11 @@ export default function ChatPanel() {
   const [isOpen, setIsOpen] = useState<boolean>(true);
   return (
     <div
-      className={` py-4 rounded-lg overflow-hidden h-full ${
+      className={` py-4 rounded-lg overflow-hidden h-full  ${
         !isOpen ? "w-40" : "w-1/3"
-      } transition-all duration-300 ease-in`}
+      } transition-all duration-300 ease-in relative`}
     >
-      <div className="hidden  w-full h-full bg-white rounded-lg p-8 overflow-hidden border-zinc-100 lg:flex flex-col gap-4">
+      <div className="hidden fixed w-[550px] h-full max-h-screen  bg-white rounded-lg p-8 overflow-hidden border-zinc-100 lg:flex flex-col gap-4">
         {isOpen ? (
           <>
             <div className="border-b border-zinc-200 w-full pb-2 flex flex-row justify-between">
