@@ -139,6 +139,111 @@ VALUES
 ('Chụp MRI não', 'Tháo bỏ tất cả đồ kim loại. Thông báo cho kỹ thuật viên về bất kỳ thiết bị cấy ghép nào', 'Cấy ghép kim loại, sợ không gian hẹp', 45, 2500000, 6, 4),
 ('Chụp X-quang ngực', 'Tháo bỏ trang sức và vật kim loại ở vùng ngực', 'Phụ nữ mang thai', 15, 350000, 4, 4),
 ('Chụp CT bụng', 'Nhịn ăn 4 giờ. Có thể cần thuốc cản quang', 'Dị ứng với thuốc cản quang, vấn đề về thận', 30, 1800000, 7, 4);
+-- Đầu tiên, chúng ta cần đảm bảo rằng khoa Thần kinh đã tồn tại trong bảng Departments
+-- Giả sử chúng ta sẽ gán các xét nghiệm này cho khoa Thần kinh (department_id = 2) và khoa Chẩn đoán hình ảnh (department_id = 4)
+
+-- Thêm các loại xét nghiệm thần kinh từ tệp CSV
+INSERT INTO TestTypes (test_name, preparation_instructions, contraindication_description, duration_minutes, price, default_location_id, department_id)
+VALUES 
+('X quang sọ não', 
+ 'Tất cả kẹp tóc, trang sức và các vật dụng kim loại khác phải được cởi bỏ', 
+ 'Không nên khảo sát X quang trong trường hợp không phù hợp như chấn thương sọ não nặng. Cân nhắc với phụ nữ có thai (do có nguy cơ bị nhiễm xạ)', 
+ 20, 
+ 200000, -- lấy giá trung bình 150.000 - 250.000
+ 4, -- Phòng X-quang
+ 4  -- Khoa Chẩn đoán hình ảnh
+),
+
+('CT sọ não', 
+ 'Khai thác tiền sử dị ứng thuốc cản quang. Tháo bỏ trang sức, vật kim loại. CT sọ não có tiêm thuốc, không nên ăn thức ăn đặc trước khi chụp ít nhất 2h, có thể ăn thức ăn loãng (cháo...) trước khi chụp ít nhất 1h', 
+ 'Cẩn trọng đối với phụ nữ có thai. Dị ứng thuốc cản quang (nếu có chỉ định chụp có thuốc)', 
+ 30, 
+ 2750000, -- lấy giá trung bình 1.500.000 - 4.000.000
+ 7, -- Phòng chụp CT
+ 4  -- Khoa Chẩn đoán hình ảnh
+),
+
+('MRI sọ não', 
+ 'Tháo bỏ tất cả dụng cụ, thiết bị và trang sức trên người. Khai thác tiền sử đặt stent, máy tạo nhịp, đặt các vật dụng kim loại vào người... Khai thác tiền sử dị ứng thuốc cản quang, triệu chứng sợ không gian hẹp', 
+ 'Bệnh nhân có kim loại trong người (Máy tạo nhịp, van kim loại...). Sợ không gian hẹp, buồng tối. Điện cực ốc tai. Dị ứng thuốc cản quang (nếu có chỉ định tiêm thuốc)', 
+ 45, 
+ 1950000, -- lấy giá trung bình 1.700.000 - 2.200.000
+ 6, -- Trung tâm chụp MRI
+ 4  -- Khoa Chẩn đoán hình ảnh
+),
+
+('Điện não đồ', 
+ 'Không dùng các chất kích thích thần kinh như rượu, cà phê. Không dùng các thuốc ức chế thần kinh như thuốc an thần. Với bệnh nhân động kinh hoặc bệnh nhân đang dùng thuốc an thần thì phải ngừng thuốc ít nhất 1 ngày trước khi làm điện não (cần cân nhắc từng trường hợp ngừng thuốc). Với các cháu nhỏ từ 2 tuổi trở xuống nếu không tự ngủ sâu được phải cho dùng thuốc an thần. Gội sạch đầu từ ngày hôm trước, hôm sau đến ghi điện não', 
+ 'Chưa có chống chỉ định cụ thể', 
+ 40, 
+ 400000, -- lấy giá trung bình 200.000 - 600.000
+ 3, -- Phòng xét nghiệm thần kinh
+ 2  -- Khoa Thần kinh
+);
+
+-- Cập nhật trường chỉ định (lưu vào cột notes của bảng TestTypes nếu cần)
+-- Nếu muốn lưu thông tin chỉ định, chúng ta sẽ cần thêm một cột mới vào bảng TestTypes
+
+-- Đầu tiên, chúng ta cần đảm bảo rằng khoa Thần kinh đã tồn tại trong bảng Departments
+-- Giả sử chúng ta sẽ gán các xét nghiệm này cho khoa Thần kinh (department_id = 2) và khoa Chẩn đoán hình ảnh (department_id = 4)
+
+-- Thêm các loại xét nghiệm thần kinh từ tệp CSV
+INSERT INTO TestTypes (test_name, preparation_instructions, contraindication_description, duration_minutes, price, default_location_id, department_id)
+VALUES 
+('X quang sọ não', 
+ 'Tất cả kẹp tóc, trang sức và các vật dụng kim loại khác phải được cởi bỏ', 
+ 'Không nên khảo sát X quang trong trường hợp không phù hợp như chấn thương sọ não nặng. Cân nhắc với phụ nữ có thai (do có nguy cơ bị nhiễm xạ)', 
+ 20, 
+ 200000, -- lấy giá trung bình 150.000 - 250.000
+ 4, -- Phòng X-quang
+ 4  -- Khoa Chẩn đoán hình ảnh
+),
+
+('CT sọ não', 
+ 'Khai thác tiền sử dị ứng thuốc cản quang. Tháo bỏ trang sức, vật kim loại. CT sọ não có tiêm thuốc, không nên ăn thức ăn đặc trước khi chụp ít nhất 2h, có thể ăn thức ăn loãng (cháo...) trước khi chụp ít nhất 1h', 
+ 'Cẩn trọng đối với phụ nữ có thai. Dị ứng thuốc cản quang (nếu có chỉ định chụp có thuốc)', 
+ 30, 
+ 2750000, -- lấy giá trung bình 1.500.000 - 4.000.000
+ 7, -- Phòng chụp CT
+ 4  -- Khoa Chẩn đoán hình ảnh
+),
+
+('MRI sọ não', 
+ 'Tháo bỏ tất cả dụng cụ, thiết bị và trang sức trên người. Khai thác tiền sử đặt stent, máy tạo nhịp, đặt các vật dụng kim loại vào người... Khai thác tiền sử dị ứng thuốc cản quang, triệu chứng sợ không gian hẹp', 
+ 'Bệnh nhân có kim loại trong người (Máy tạo nhịp, van kim loại...). Sợ không gian hẹp, buồng tối. Điện cực ốc tai. Dị ứng thuốc cản quang (nếu có chỉ định tiêm thuốc)', 
+ 45, 
+ 1950000, -- lấy giá trung bình 1.700.000 - 2.200.000
+ 6, -- Trung tâm chụp MRI
+ 4  -- Khoa Chẩn đoán hình ảnh
+),
+
+('Điện não đồ', 
+ 'Không dùng các chất kích thích thần kinh như rượu, cà phê. Không dùng các thuốc ức chế thần kinh như thuốc an thần. Với bệnh nhân động kinh hoặc bệnh nhân đang dùng thuốc an thần thì phải ngừng thuốc ít nhất 1 ngày trước khi làm điện não (cần cân nhắc từng trường hợp ngừng thuốc). Với các cháu nhỏ từ 2 tuổi trở xuống nếu không tự ngủ sâu được phải cho dùng thuốc an thần. Gội sạch đầu từ ngày hôm trước, hôm sau đến ghi điện não', 
+ 'Chưa có chống chỉ định cụ thể', 
+ 40, 
+ 400000, -- lấy giá trung bình 200.000 - 600.000
+ 3, -- Phòng xét nghiệm thần kinh
+ 2  -- Khoa Thần kinh
+);
+
+-- Cập nhật trường chỉ định (lưu vào cột notes của bảng TestTypes nếu cần)
+-- Nếu muốn lưu thông tin chỉ định, chúng ta sẽ cần thêm một cột mới vào bảng TestTypes
+
+-- -- Thêm cột indication (chỉ định) vào bảng TestTypes
+-- ALTER TABLE TestTypes ADD COLUMN indication TEXT;
+
+-- -- Cập nhật thông tin chỉ định cho các xét nghiệm đã thêm
+-- UPDATE TestTypes SET indication = 'Đánh giá cấu trúc xương hộp sọ. Phát hiện vôi hóa bất thường. Đánh giá các cấu trúc lỗ tự nhiên, xoang vùng hàm mặt. Chấn thương sọ não' 
+-- WHERE test_name = 'X quang sọ não';
+
+-- UPDATE TestTypes SET indication = 'Chấn thương sọ não. Tai biến mạch máu não. Nghi ngờ bất thường nhu mô não. Đánh giá hệ mạch não phát hiện dị dạng, hẹp, tắc mạch. Đánh giá tưới máu não trong bệnh lý u não, tắc mạch não' 
+-- WHERE test_name = 'CT sọ não';
+
+-- UPDATE TestTypes SET indication = 'Tai biến mạch máu não. U não. Bất thường bẩm sinh. Bất thường chuyển hóa. Chấn thương sọ não. Bất thường mạch máu' 
+-- WHERE test_name = 'MRI sọ não';
+
+-- UPDATE TestTypes SET indication = 'Bệnh động kinh hoặc nghi ngờ bị động kinh với mục đích chẩn đoán, theo dõi, định khu tổn thương. Phân biệt chứng co giật do nguyên nhân khác với bệnh động kinh. Chẩn đoán đau đầu mạn tính. Chẩn đoán co giật do sốt thể phức hợp. Chẩn đoán chết não. Chẩn đoán tình trạng tâm thần thay đổi do nguyên nguyên nhân, như bệnh não chuyển hóa nhiễm độc. Chẩn đoán tình trạng mất ý thức khi kết quả xét nghiệm tim chưa đủ cơ sở kết luận. Đánh giá những thay đổi thiếu máu cục bộ sau xuất huyết nội sọ và xuất huyết dưới nhện. Theo dõi mức độ gây mê trước phẫu thuật' 
+-- WHERE test_name = 'Điện não đồ';
 
 -- Cuộc hẹn khám
 INSERT INTO Appointments (patient_id, doctor_id, test_type_id, department_id, location_id, appointment_date, appointment_time, reason, status, notes)
