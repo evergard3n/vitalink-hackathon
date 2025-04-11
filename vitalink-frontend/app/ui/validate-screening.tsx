@@ -5,7 +5,7 @@ export default function ValidateScreening() {
   const formContext = useFormContext();
   function handleClick() {
     const finalForm : FormDataType = {
-      test_type_id: formContext?.formData.test_type_id || "",
+      test_type_id: formContext?.formData.test_type_id || [],
       appointment_date: formContext?.formData.appointment_date || "",
       reason: formContext?.formData.reason || "",
       department_id: formContext?.formData.department_id || "",
@@ -17,12 +17,13 @@ export default function ValidateScreening() {
       <div className="grow">
         <p className="font-semibold">Triệu chứng:</p>
         <p>{formContext?.formData.reason}</p>
+        <p>Tức lồng ngực</p>
         <p className="font-semibold">Xét nghiệm cần thực hiện:</p>
         <p>{formContext?.formData.test_type_id}</p>
         <p className="font-semibold">Chuyên khoa:</p>
         <p>{formContext?.formData.department_id}</p>
         <p className="font-semibold">Ngày hẹn khám:</p>
-        <p>{formContext?.formData.appointment_date}</p>
+        <p>{new Date(formContext?.formData.appointment_date || "").toLocaleDateString("vi-VN")}</p>
       </div>
       <button
         type="submit"

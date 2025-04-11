@@ -34,7 +34,8 @@ export default function ChatBox() {
     }
     setText("");
   }
-  function handleClick() {
+  function handleClick(e: React.FormEvent<HTMLButtonElement>) {
+    e.preventDefault()
     if (!recording) {
       startRecording();
       setRecording(true);
@@ -63,8 +64,7 @@ export default function ChatBox() {
           rows={1}
         />
 
-        {status}
-        {transcript}
+        
 
         <div className="flex flex-row justify-between items-center">
           <button

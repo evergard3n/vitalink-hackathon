@@ -52,3 +52,20 @@ export interface Patient {
     created_at: string,
     updated_at: string
 }
+
+export interface Test {
+    "test_name" : string,
+    "preparation_instructions" : string,
+    "contraindication_description" : string,
+    "duration_minutes" : string,
+    "price" : string,
+    "default_location_id" : number,
+    "department_id" : number,
+    "test_type_id" : number,
+    "created_at" : string,
+    "updated_at" : string
+}
+export interface AllTest {
+    total: number,
+    items: Test[]
+}

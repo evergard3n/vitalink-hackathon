@@ -1,4 +1,4 @@
-import { AllAppointments, Patient } from "./definitions";
+import { AllAppointments, AllTest, Patient } from "./definitions";
 
 export async function getAllAppointments() {
   try {
@@ -40,5 +40,27 @@ export async function getCurrentPatientInfo(patient_id: string) {
     return data;
   } catch (error) {
     throw new Error("Failed to get patient info");
+  }
+}
+
+export async function getAllTests() {
+  try {
+    const response = await fetch(
+      "http://localhost:8000/api/v1/test-types/?skip=0&limit=100",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Cant fetch all tests");
+    }
+    const data: AllTest = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to get all tests");
   }
 }

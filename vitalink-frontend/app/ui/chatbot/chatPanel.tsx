@@ -9,16 +9,16 @@ export default function ChatPanel() {
   return (
     <div
       className={` py-4 rounded-lg overflow-hidden h-full  ${
-        !isOpen ? "w-40" : "w-1/3"
-      } transition-all duration-300 ease-in relative`}
+        !isOpen ? "w-40" : "w-2/3"
+      } transition-all duration-300 ease-in relative grow`}
     >
-      <div className="hidden fixed w-[550px] h-full max-h-screen  bg-white rounded-lg p-8 overflow-hidden border-zinc-100 lg:flex flex-col gap-4">
+      <div className="hidden  h-full max-h-screen  bg-white rounded-lg p-8 overflow-hidden border-zinc-100 lg:flex flex-col gap-4">
         {isOpen ? (
           <>
             <div className="border-b border-zinc-200 w-full pb-2 flex flex-row justify-between">
               <div>
                 <h1 className="font-semibold text-2xl">MediAssist</h1>
-                <p>Trợ lý ảo thông minh</p>
+                <p>Sử dụng MediAssist Chatbot để điền đơn ngay</p>
               </div>
               <button onClick={() => setIsOpen(!isOpen)} className="">
                 <ArrowLeftIcon width={24} height={24} />

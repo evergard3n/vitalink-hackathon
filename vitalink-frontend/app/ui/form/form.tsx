@@ -73,11 +73,11 @@ export default function Form() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
     console.log(data);
-    formContext?.updateFormData({reason : formFields.symptoms})
-    router.push("/patients/create/checkup");
+    //formContext?.updateFormData({reason : formFields.symptoms})
+    router.push("/patients/create/screening");
   }
   return (
-    <div className="p-2 rounded-lg overflow-hidden grow h-full">
+    <div className=" p-2 rounded-lg overflow-hidden grow h-full">
       <div className="w-full h-full bg-white drop-shadow-sm rounded-lg p-8 border-4 border-zinc-100 flex flex-col">
         <form
           onSubmit={handleSubmit}
@@ -252,7 +252,7 @@ export default function Form() {
             Triệu chứng
           </h1>
           <div className="h-0.5 w-1/6 bg-green-400 mb-4"></div>
-          <label>Chuyên khoa</label>
+          {/* <label>Chuyên khoa</label>
           <SearchableDropdown
             options={[
               "Khoa tim mạch",
@@ -261,7 +261,7 @@ export default function Form() {
               "Khoa Chẩn đoán hình ảnh",
               "Khoa Xét nghiệm",
             ]}
-          />
+          /> */}
           <label htmlFor="trieuchung">
             Mô tả triệu chứng <span className="text-red-700">*</span>
           </label>
@@ -274,7 +274,7 @@ export default function Form() {
             type="submit"
             className="bg-blue-500 hover:bg-blue-400 transition-colors duration-150 ease-in w-fit px-4 py-2 text-white rounded-lg lg:ml-auto mt-auto"
           >
-            Tiếp tục{" "}
+            Tiếp tục
           </button>
         </form>
       </div>

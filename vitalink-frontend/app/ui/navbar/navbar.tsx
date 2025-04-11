@@ -2,6 +2,7 @@
 import { Bars3Icon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import NavItem from "./navitem";
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import {
   SignedOut,
@@ -45,10 +46,20 @@ export default function NavBar() {
             }}
           />
         </button>
-        <Link href={"/"} className="flex flex-row items-center justify-center  w-full grow">
-          <PlusCircleIcon width={36} height={36} />
-          <h1 className="text-2xl font-black">VitaLink</h1>
-        </Link>
+        <div className="w-full grow  flex flex-row items-center justify-center">
+          <Link
+            href={"/"}
+            className="w-36 h-12  flex flex-row items-center justify-center"
+          >
+            <Image
+              src={"/logo.png"}
+              width={500}
+              height={500}
+              alt={"logo"}
+              className=""
+            ></Image>
+          </Link>
+        </div>
         {isOpen && (
           <div className="bg-white absolute top-18 py-8  left-0 h-fit w-full">
             <ol className="flex flex-col z-50 md:flex-row md:justify-center items-center gap-12 md:ml-12">
@@ -76,4 +87,3 @@ export default function NavBar() {
     </div>
   );
 }
-

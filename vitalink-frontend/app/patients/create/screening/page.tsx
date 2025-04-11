@@ -1,20 +1,40 @@
-'use client'
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+"use client";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  DocumentTextIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Page() {
-  const router = useRouter()
+  const [open, setOpen] = useState<boolean>(false);
+  const router = useRouter();
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
     console.log(data);
-    router.push("/patients/create/checkup");
+    router.push("/patients/create/history");
   }
   return (
-    <div className="p-4 rounded-lg overflow-hidden grow h-full">
-      <div className="w-full h-full bg-white drop-shadow-sm rounded-lg p-8 border-8 border-zinc-100 flex flex-col">
+    <div
+      className={`p-4 rounded-lg overflow-hidden grow h-full ${
+        open ? "lg:w-full" : "lg:w-12 lg:bg-zinc-100"
+      } transition-all duration-100 ease-in`}
+    >
+      <div
+        className={`w-full h-full relative bg-white drop-shadow-sm rounded-lg p-8 border-8 border-zinc-100 flex flex-col ${
+          open ? "" : "lg:hidden"
+        }`}
+      >
+        <button
+          onClick={() => setOpen(false)}
+          className="absolute z-50 top-14 right-12 flex flex-row px-4 py-2 gap-2 rounded-full hover:bg-zinc-200"
+        >
+          Ẩn <ArrowRightIcon width={24} height={24}></ArrowRightIcon>
+        </button>
         <Link
           href={"/patients/create"}
           className="flex flex-row items-center gap-2"
@@ -23,8 +43,12 @@ export default function Page() {
         </Link>
         <h1 className="md:text-4xl font-bold pt-4 mb-2">Thông tin sàng lọc</h1>
         <div className="bg-green-400 w-1/4 h-0.5 mb-4"></div>
-        <p>Vui lòng trả lời đầy đủ các câu hỏi dưới đây.</p>
-        <form action="" onSubmit={handleSubmit} className="flex flex-col items-start w-full gap-4 mt-6">
+        <p>Kiểm tra thông tin từ Chatbot</p>
+        <form
+          action=""
+          onSubmit={handleSubmit}
+          className="flex flex-col items-start w-full gap-4 mt-6 lg:overflow-y-auto lg:h-full lg:max-h-[700px]"
+        >
           <label htmlFor="position">Vị trí xuất hiện cơn đau?</label>
           <input
             type="text"
@@ -169,6 +193,14 @@ export default function Page() {
           </button>
         </form>
       </div>
+      {!open && (
+        <button
+          className="mt-11 -mx-2 p-2 rounded-full hover:bg-zinc-200"
+          onClick={() => setOpen(true)}
+        >
+          <DocumentTextIcon width={24} height={24} />
+        </button>
+      )}
     </div>
   );
 }

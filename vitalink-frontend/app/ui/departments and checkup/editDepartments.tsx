@@ -40,7 +40,7 @@ export default function EditDepartments({
   }
   return (
     <div>
-      <ol className="grid grid-cols-3 gap-4 pt-4">
+      <ol className="grid md:grid-cols-3 gap-4 pt-4">
         {dep.map((department, index) => (
           <li
             key={index}

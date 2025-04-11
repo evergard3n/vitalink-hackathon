@@ -3,7 +3,7 @@
 import { createContext, useContext, useState } from "react";
 
 export interface FormDataType {
-    test_type_id: string;
+    test_type_id: number[];
     appointment_date: string;
     reason: string;
     department_id: string;
@@ -18,7 +18,7 @@ const FormContext = createContext<FormContextType | undefined>(undefined);
 
 export function FormProvider({ children }: { children: React.ReactNode }) {
   const [formData, setFormData] = useState<FormDataType>({
-    test_type_id: "",
+    test_type_id: [],
     appointment_date: "",
     reason: "",
     department_id: "",

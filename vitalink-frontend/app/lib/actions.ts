@@ -48,7 +48,7 @@ export async function createAppointment(
   const newAppointment = {
     patient_id: userId,
     doctor_id: 1,
-    test_type_id: parseInt(test_type_id),
+    test_type_id: test_type_id[0],
     department_id: departments.get(department_id) || 1,
     location_id: 1,
     appointment_date: appointment_date,

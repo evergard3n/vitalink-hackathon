@@ -21,7 +21,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         <ChatPanel />
-        <div className="grow">{children}</div>
+        <div className="">{children}</div>
       </div>
     </AudioRecorderProvider>
   );

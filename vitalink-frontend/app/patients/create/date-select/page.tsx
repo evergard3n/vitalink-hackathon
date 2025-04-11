@@ -1,6 +1,12 @@
 import DateSelector from "@/app/ui/dateselect";
+import EditDepartments from "@/app/ui/departments and checkup/editDepartments";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+const departments: string[] = [
+  "Khoa Tai mũi họng",
+  "Khoa Tim mạch",
+  "Khoa Tâm lý - Tâm thần",
+];
 
 export default function Page() {
   return (
@@ -12,6 +18,15 @@ export default function Page() {
         >
           <ArrowLeftIcon width={16} height={16}></ArrowLeftIcon>Quay lại
         </Link>
+        <h1 className="text-left font-bold text-4xl">Chuyên khoa đề xuất</h1>
+
+        <p>
+          Dựa trên triệu chứng và yêu cầu của bạn, đây là các chuyên khoa bạn
+          nên tới khám:
+        </p>
+        <EditDepartments departments={departments}></EditDepartments> 
+        <div className="w-full h-0.5 bg-zinc-100"></div>
+       
         <h1 className="text-left font-bold text-4xl">Chọn ngày khám</h1>
         <DateSelector/>
       </div>
