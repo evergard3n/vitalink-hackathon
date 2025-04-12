@@ -50,7 +50,7 @@ export default function Form() {
   useEffect(() => {
     if (!chatbotFormData) return;
     if (JSON.stringify(formFields) !== JSON.stringify(chatbotFormData)) {
-      setFormFields(chatbotFormData);
+      setFormFields(chatbotFormData.personal);
     }
   }, [chatbotFormData]);
 

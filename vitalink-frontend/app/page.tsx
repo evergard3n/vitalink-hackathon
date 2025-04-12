@@ -1,23 +1,18 @@
 
 import {
-  PlusCircleIcon,
   DocumentPlusIcon,
   DocumentMagnifyingGlassIcon,
   ChatBubbleBottomCenterIcon,
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import Link from "next/link";
 export default function Home() {
   return (
     <div className="w-full h-screen flex justify-center items-center">
-      <div className="md:w-1/2 md:h-1/2 bg-white rounded-2xl drop-shadow-lg grid md:grid-cols-2 overflow-hidden">
-        <div className="h-full min-h-24 flex flex-col items-start justify-center px-10 bg-green-400">
+      <div className="md:w-1/2 md:h-1/2 md:min-w-[700px] bg-white rounded-2xl drop-shadow-lg grid md:grid-cols-2 overflow-hidden">
+        <div className="h-full min-h-24 flex flex-col items-start justify-center px-10 bg-white">
           <div className="flex flex-row items-center">
-            <PlusCircleIcon
-              width={50}
-              height={50}
-              className="text-white"
-            ></PlusCircleIcon>
-            <h1 className="text-6xl font-black text-white">VitaLink</h1>
+          <Image src={"/logo.png"} width={500} height={500} alt={"logo"} className=""></Image>
           </div>
         </div>
         <div>
