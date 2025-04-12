@@ -1,12 +1,5 @@
 'use client'
 import { useState } from "react";
-const departments = [
-  "Khoa tim mạch",
-  "Khoa Thần kinh",
-  "Khoa Chỉnh hình",
-  "Khoa Chẩn đoán hình ảnh",
-  "Khoa Xét nghiệm"
-]
 
 export default function SearchableDropdown({options}: {options: string[]}) {
   const [search, setSearch] = useState("");

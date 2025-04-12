@@ -3,7 +3,7 @@ import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
 import SearchableDropdown from "../form/chuyenkhoa";
 import { useFormContext } from "@/app/lib/formContext";
-
+/* eslint-disable react-hooks/exhaustive-deps */
 export default function EditDepartments({
   departments,
 }: {

@@ -13,8 +13,6 @@ export default function ChatBox() {
     startRecording,
     stopRecording,
     isRecording,
-    clearTranscript,
-    status,
   } = audioRecorderContext || {};
   const transcript = audioRecorderContext?.transcript || "";
   const { sendMessage } = useWebSocket() || {};

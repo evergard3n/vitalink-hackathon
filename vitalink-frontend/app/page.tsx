@@ -1,6 +1,5 @@
 
 import {
-  PlusCircleIcon,
   DocumentPlusIcon,
   DocumentMagnifyingGlassIcon,
   ChatBubbleBottomCenterIcon,

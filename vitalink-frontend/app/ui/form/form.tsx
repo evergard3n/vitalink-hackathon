@@ -1,7 +1,5 @@
 "use client";
 
-import SearchableDropdown from "./chuyenkhoa";
-
 import { useRouter } from "next/navigation";
 import { useWebSocket } from "@/app/lib/wsContext";
 import { useEffect, useState } from "react";

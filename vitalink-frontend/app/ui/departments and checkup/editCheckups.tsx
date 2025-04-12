@@ -3,14 +3,14 @@ import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
 import SearchableDropdown from "../form/chuyenkhoa";
 import { useFormContext } from "@/app/lib/formContext";
-
+/* eslint-disable react-hooks/exhaustive-deps */
 export default function EditCheckups({ checkups }: { checkups: string[] }) {
   const formDataContext = useFormContext();
   const [open, setOpen] = useState<boolean>(false);
   const [dep, setDep] = useState<string[]>(checkups);
   useEffect(() => {
     formDataContext?.updateFormData({
-      test_type_id: dep[0],
+      test_type_id: dep.map(Number),
     });
   },[]);
   function handleDelete(index: number) {
@@ -26,7 +26,7 @@ export default function EditCheckups({ checkups }: { checkups: string[] }) {
   }
   function handleSubmit() {
     formDataContext?.updateFormData({
-      test_type_id: dep[0],
+      test_type_id: dep.map(Number),
     });
     setOpen(false);
   }

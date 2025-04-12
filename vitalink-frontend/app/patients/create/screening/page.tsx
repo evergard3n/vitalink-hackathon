@@ -8,7 +8,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
+/* eslint-disable react-hooks/exhaustive-deps */
 export default function Page() {
   const [open, setOpen] = useState<boolean>(false);
   const chatbotFormData = useWebSocket()?.formContent;

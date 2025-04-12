@@ -2,7 +2,7 @@
 import { useState } from "react";
 import ChatBox from "./chatbox";
 import ChatBubbles from "./chatbubble";
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
 export default function ChatPanel() {
   const [isOpen, setIsOpen] = useState<boolean>(true);

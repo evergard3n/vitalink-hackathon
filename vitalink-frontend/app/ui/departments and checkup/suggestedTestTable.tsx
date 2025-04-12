@@ -2,7 +2,7 @@
 import { getAllTests } from "@/app/lib/data";
 import { AllTest } from "@/app/lib/definitions";
 import { useEffect, useState } from "react";
-
+/* eslint-disable react-hooks/exhaustive-deps */
 export default function SuggestedTestTable({
   test_type_id,
 }: {

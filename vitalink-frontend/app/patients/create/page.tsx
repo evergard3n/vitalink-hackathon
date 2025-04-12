@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Form from "../../ui/form/form";
-import { ArrowLeftIcon, ArrowRightIcon, DocumentIcon, DocumentTextIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon, DocumentTextIcon } from "@heroicons/react/24/outline";
 
 export default function Page() {
   const [open, setOpen] = useState<boolean>(false);

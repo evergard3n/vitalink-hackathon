@@ -1,6 +1,5 @@
 import { getCurrentPatientInfo } from "@/app/lib/data";
 import { Patient } from "@/app/lib/definitions";
-import DateSelector from "@/app/ui/dateselect";
 import ValidateScreening from "@/app/ui/validate-screening";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";

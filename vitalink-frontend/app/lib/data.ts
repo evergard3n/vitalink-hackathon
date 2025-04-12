@@ -1,5 +1,6 @@
 import { AllAppointments, AllTest, Patient } from "./definitions";
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export async function getAllAppointments() {
   try {
     const response = await fetch(

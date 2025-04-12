@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { Appointment, FormContents } from "./definitions";
 import { FormDataType } from "./formContext";
 
 const PatientSchema = z.object({
@@ -11,19 +10,6 @@ const PatientSchema = z.object({
   address: z.string(),
   phone_number: z.string(),
   patient_id: z.number(),
-});
-
-const AppointmentSchema = z.object({
-  patient_id: z.number(),
-  doctor_id: z.number(),
-  test_type_id: z.number(),
-  department_id: z.number(),
-  location_id: z.number(),
-  appointment_date: z.string(),
-  appointment_time: z.string(),
-  reason: z.string(),
-  status: z.string(),
-  notes: z.string(),
 });
 
 export async function createAppointment(
