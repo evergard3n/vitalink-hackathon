@@ -22,7 +22,7 @@ const navItems = [
     name: "Tra cứu lịch khám ",
   },
   {
-    href: "/patients/chat",
+    href: "/patients/chatbot",
     name: "Trợ lý ảo ",
   },
 ];
@@ -35,7 +35,7 @@ export default function NavBar() {
     setIsOpen(false); // Close the menu on pathname change
   }, [pathname]);
   return (
-    <div className="w-full md:w-[90%] overflow-hidden fixed md:absolute z-20 h-18 bg-linear-to-br from-white to-zinc-150 drop-shadow-xs transition-all duration-200 ease-in backdrop-blur-sm min-h-12 md:border border-b border-zinc-200 md:rounded-lg flex flex-row items-center gap-8  px-4">
+    <div className="w-full md:w-[90%] fixed md:absolute z-20 h-18 bg-linear-to-br from-white to-zinc-150 drop-shadow-xs transition-all duration-200 ease-in backdrop-blur-sm min-h-12 md:border border-b border-zinc-200 md:rounded-lg flex flex-row items-center gap-8  px-4">
       <div className="flex flex-row justify-between md:justify-center w-full items-center gap-4">
         <button className="block md:hidden scale-125">
           <Bars3Icon
@@ -43,6 +43,7 @@ export default function NavBar() {
             height={16}
             onClick={() => {
               setIsOpen(!isOpen);
+              console.log(isOpen)
             }}
           />
         </button>
@@ -52,7 +53,7 @@ export default function NavBar() {
         </div>
         </Link>
         {isOpen && (
-          <div className=" bg-white absolute top-18 py-8 opacity-95 backdrop-blur-2xl left-0 h-fit w-full">
+          <div className=" bg-white absolute top-18 py-8 opacity-95 backdrop-blur-2xl left-0 h-fit w-full z-60">
             <ol className="flex flex-col md:flex-row md:justify-center items-center gap-12 md:ml-12">
               {navItems.map((item) => (
                 <NavItem key={item.href} href={item.href} name={item.name} />
@@ -60,6 +61,7 @@ export default function NavBar() {
             </ol>
           </div>
         )}
+
         <ol className="hidden lg:flex lg:flex-row lg:justify-center items-center gap-12 md:ml-12">
           {navItems.map((item) => (
             <NavItem key={item.href} href={item.href} name={item.name} />
