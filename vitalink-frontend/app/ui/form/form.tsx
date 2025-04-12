@@ -51,7 +51,13 @@ export default function Form() {
   useEffect(() => {
     if (!chatbotFormData) return;
     if (JSON.stringify(formFields) !== JSON.stringify(chatbotFormData)) {
-      setFormFields(chatbotFormData);
+      setFormFields(chatbotFormData.personal);
+    }
+    if(chatbotFormData.personal.symptoms != null) {
+      formContext?.updateFormData({
+        reason: chatbotFormData.medical.symptoms
+      })
+      router.push("/patients/create/screening")
     }
   }, [chatbotFormData]);
 
@@ -267,6 +273,14 @@ export default function Form() {
           </label>
           <textarea
             id="trieuchung"
+            value={chatbotFormData?.medical.symptoms ?? ""}
+            onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+              setFormFields({
+                ...formFields,
+                symptoms: event.target.value,
+              });
+              router.push("/patients/create/screening");
+            }}
             required
             className="min-h-30 border border-zinc-200 rounded-lg px-2 pt-2 resize-none"
           ></textarea>

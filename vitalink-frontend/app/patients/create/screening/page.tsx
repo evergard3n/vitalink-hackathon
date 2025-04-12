@@ -1,4 +1,5 @@
 "use client";
+import { useWebSocket } from "@/app/lib/wsContext";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -6,10 +7,22 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const [open, setOpen] = useState<boolean>(false);
+  const chatbotFormData = useWebSocket()?.formContent;
+  const [formFields, setFormFields] = useState({
+    site: "",
+    onset: "",
+    character: "",
+    radiation: "",
+    alleviating: "",
+    timing: "",
+    exacerbating: "",
+    severity: "",
+    previous_check: "",
+  });
   const router = useRouter();
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -18,6 +31,15 @@ export default function Page() {
     console.log(data);
     router.push("/patients/create/history");
   }
+  useEffect(() => {
+    if (!chatbotFormData) return;
+    if (JSON.stringify(formFields) !== JSON.stringify(chatbotFormData)) {
+      setFormFields(chatbotFormData.symptom_details);
+    }
+    if(chatbotFormData.symptom_details.previous_check) {
+      router.push("/patients/create/history")
+    }
+  }, [chatbotFormData]);
   return (
     <div
       className={`p-4 rounded-lg overflow-hidden grow h-full ${
@@ -41,7 +63,7 @@ export default function Page() {
         >
           <ArrowLeftIcon width={16} height={16}></ArrowLeftIcon>Quay lại
         </Link>
-        <h1 className="md:text-4xl font-bold pt-4 mb-2">Thông tin sàng lọc</h1>
+        <h1 className="md:text-4xl font-bold pt-4 mb-2">Bệnh sử</h1>
         <div className="bg-green-400 w-1/4 h-0.5 mb-4"></div>
         <p>Kiểm tra thông tin từ Chatbot</p>
         <form
@@ -54,121 +76,96 @@ export default function Page() {
             type="text"
             name="position"
             id="position"
+            value={formFields?.site || ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, site: event.target.value });
+            }}
             className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
             placeholder="VD: đau nửa đầu phía sau, bụng dưới,..."
           />
           <label htmlFor="last">
-            Từ lúc xuất hiện cơn đau đầu tiên đến giờ, cơn đau có tăng lên hay
-            không?
+            Thời điểm khởi phát triệu chứng
           </label>
           <input
             type="text"
             name="last"
             id="last"
+            value={formFields?.onset || ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, onset: event.target.value });
+            }}
             className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
             placeholder="VD: Có"
           />
           <label htmlFor="occasion">
-            Cơn đau đột ngột xuất hiện hay xuất hiện từ từ?
+            Tính chất của triệu chứng? (kéo dài hay theo từng cơn)
           </label>
           <input
             type="text"
             name="occasion"
             id="occasion"
+            value={formFields?.character || ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, character: event.target.value });
+            }}
             className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
             placeholder="VD: Đột ngột xuất hiện"
           />
           <label htmlFor="vadap">
-            Trước đó vị trí bị đau có bị va đập vào đâu hay chịu tác động mạnh
-            gì không?
+            Triệu chứng đó có lan tỏa hay kèm theo triệu chứng nào khác không
           </label>
           <input
             type="text"
             name="vadap"
             id="vadap"
+            value={formFields?.radiation || ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, radiation: event.target.value });
+            }}
             className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
             placeholder="VD: đau nửa đầu phía sau, bụng dưới,..."
           />
           <label htmlFor="cangay">
-            Cơn đau của anh như thế nào. Ví dụ như đau liên tục cả ngày hơn đau
-            thành từng cơn?
+            Yếu tố làm giảm triệu chứng của anh/chị?
           </label>
           <input
             type="text"
             name="cangay"
             id="cangay"
+            value={formFields?.alleviating || ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, alleviating: event.target.value });
+            }}
             className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
             placeholder="VD: Từng cơn."
           />
-          <label htmlFor="duration">Mỗi cơn đau kéo dài khoảng bao lâu?</label>
-          <input
-            type="text"
-            id="duration"
-            name="duration"
-            placeholder="Ví dụ: 3-4 phút"
-            className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
-          />
 
-          <label htmlFor="spread">
-            Cơn đau có lan đi đâu không hay chỉ ở nguyên vị trí?
+<label htmlFor="timing">
+            Thời gian và tần suất triệu chứng?
           </label>
           <input
             type="text"
-            id="spread"
-            name="spread"
-            placeholder="Ví dụ: Lan xuống gáy"
+            id="timing"
+            name="timing"
+            value={formFields?.timing|| ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, timing: event.target.value });
+            }}
+            placeholder="Ví dụ: 5"
             className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
           />
 
-          <label htmlFor="relief">
-            Anh/chị thường làm gì để giảm đau khi cơn đau xuất hiện?
-          </label>
-          <input
-            type="text"
-            id="relief"
-            name="relief"
-            placeholder="Ví dụ: Ngồi nghỉ một lúc"
-            className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
-          />
-
-          <label htmlFor="medication">
-            Có sử dụng thuốc giảm đau nào không?
-          </label>
-          <input
-            type="text"
-            id="medication"
-            name="medication"
-            placeholder="Ví dụ: Paracetamol, nhưng không đỡ"
-            className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
-          />
-
-          <label htmlFor="time">
-            Cơn đau thường xuất hiện vào thời gian nào trong ngày?
-          </label>
-          <input
-            type="text"
-            id="time"
-            name="time"
-            placeholder="Ví dụ: Chiều tối sau khi đi làm về"
-            className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
-          />
-
-          <label htmlFor="trigger">Có yếu tố nào làm tăng cơn đau không?</label>
-          <input
-            type="text"
-            id="trigger"
-            name="trigger"
-            placeholder="Ví dụ: Không có"
-            className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
-          />
-
-          <label htmlFor="pain_level">
+<label htmlFor="pain_level">
             Đánh giá mức độ đau trên thang điểm từ 1 đến 10?
           </label>
           <input
             type="number"
             id="pain_level"
             name="pain_level"
+            value={formFields?.severity || ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, severity: event.target.value });
+            }}
             min="1"
             max="10"
             placeholder="Ví dụ: 5"
@@ -182,6 +179,11 @@ export default function Page() {
             type="text"
             id="previous_check"
             name="previous_check"
+            value={formFields?.previous_check || ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, previous_check: event.target.value });
+              router.push("/patients/create/history");
+            }}
             placeholder="Ví dụ: Chưa đi khám"
             className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
           />
@@ -189,7 +191,7 @@ export default function Page() {
             type="submit"
             className="bg-blue-500 hover:bg-blue-400 transition-colors duration-150 ease-in w-fit px-4 py-2 text-white rounded-lg lg:ml-auto mt-auto"
           >
-            Tiếp tục{" "}
+            Tiếp tục
           </button>
         </form>
       </div>

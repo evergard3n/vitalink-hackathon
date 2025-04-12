@@ -6,6 +6,8 @@ import EditDepartments from "@/app/ui/departments and checkup/editDepartments";
 import SuggestedTestTable from "@/app/ui/departments and checkup/suggestedTestTable";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useWebSocket } from "@/app/lib/wsContext";
+import { useState } from "react";
 
 const departments: string[] = [
   "Khoa Tai mũi họng",
@@ -14,6 +16,7 @@ const departments: string[] = [
 ];
 export default function Page() {
   const formContent = useFormContext();
+  
   const router = useRouter()
   function handleClick() {
     formContent?.updateFormData({

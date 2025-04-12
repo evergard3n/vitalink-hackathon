@@ -58,7 +58,7 @@ export const  WebSocketProvider = ({
         };
         console.log(response)
         setMessages((prev) => [...prev, newMessage]);
-        setFormContent(response.form.personal);
+        setFormContent(response.form);
       } else {
         
         console.log('form received')

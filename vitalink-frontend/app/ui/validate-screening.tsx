@@ -1,6 +1,7 @@
 "use client";
 import { createAppointment } from "../lib/actions";
 import { FormDataType, useFormContext } from "../lib/formContext";
+import SuggestedTestTable from "./departments and checkup/suggestedTestTable";
 export default function ValidateScreening() {
   const formContext = useFormContext();
   function handleClick() {
@@ -18,12 +19,13 @@ export default function ValidateScreening() {
         <p className="font-semibold">Triệu chứng:</p>
         <p>{formContext?.formData.reason}</p>
         <p>Tức lồng ngực</p>
-        <p className="font-semibold">Xét nghiệm cần thực hiện:</p>
-        <p>{formContext?.formData.test_type_id}</p>
         <p className="font-semibold">Chuyên khoa:</p>
         <p>{formContext?.formData.department_id}</p>
         <p className="font-semibold">Ngày hẹn khám:</p>
+        
         <p>{new Date(formContext?.formData.appointment_date || "").toLocaleDateString("vi-VN")}</p>
+        <p className="font-semibold">Xét nghiệm có thể cần thực hiện:</p>
+        <SuggestedTestTable test_type_id={[1,2,3]}/>
       </div>
       <button
         type="submit"

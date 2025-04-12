@@ -1,11 +1,31 @@
 "use client";
+import { useWebSocket } from "@/app/lib/wsContext";
 import { ArrowLeftIcon, DocumentTextIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const [open, setOpen] = useState<boolean>(false);
+  const chatbotFormData = useWebSocket()?.formContent;
+  const [formFields, setFormFields] = useState({
+    position: "",
+    last: "",
+    occasion: "",
+    vadap: "",
+    cangay: "",
+    duration: "",
+    spread: "",
+  });
+  useEffect(() => {
+    if (!chatbotFormData) return;
+    if (JSON.stringify(formFields) !== JSON.stringify(chatbotFormData)) {
+      setFormFields(chatbotFormData.history);
+    }
+    if (chatbotFormData.symptom_details.previous_check) {
+      router.push("/patients/create/history");
+    }
+  }, [chatbotFormData]);
   const router = useRouter();
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -30,7 +50,7 @@ export default function Page() {
           className="absolute z-50 top-14 right-12 flex flex-row px-4 py-2 gap-2 rounded-full hover:bg-zinc-200"
         ></button>
         <Link
-          href={"/patients/screening/history"}
+          href={"/patients/screening"}
           className="flex flex-row items-center gap-2"
         >
           <ArrowLeftIcon width={16} height={16}></ArrowLeftIcon>Quay lại
@@ -50,6 +70,10 @@ export default function Page() {
             id="position"
             className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
             placeholder="VD: tiểu đường, tai biến,..."
+            value={formFields?.position || ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, position: event.target.value });
+            }}
           />
           <label htmlFor="last">
             Anh/chị đã từng thực hiện phẫu thuật bao giờ chưa? Nếu có thì ở vị
@@ -59,16 +83,22 @@ export default function Page() {
             type="text"
             name="last"
             id="last"
+            value={formFields?.last || ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, last: event.target.value });
+            }}
             className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
-            placeholder="VD: Có"
           />
           <label htmlFor="occasion">Anh chị có bị dị ứng gì không?</label>
           <input
             type="text"
             name="occasion"
             id="occasion"
+            value={formFields?.occasion || ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, occasion: event.target.value });
+            }}
             className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
-            placeholder="VD: Đột ngột xuất hiện"
           />
           <label htmlFor="vadap">Tiền sử dịch tễ gần đây của anh/chị?</label>
           <input
@@ -76,7 +106,10 @@ export default function Page() {
             name="vadap"
             id="vadap"
             className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
-            placeholder="VD: "
+            value={formFields?.vadap || ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, vadap: event.target.value });
+            }}
           />
           <label htmlFor="cangay">
             Nếu anh/chị là nữ, tiền sử thai sản, kinh nguyệt của chị là gì?
@@ -86,7 +119,10 @@ export default function Page() {
             name="cangay"
             id="cangay"
             className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
-            placeholder="VD: ."
+            value={formFields?.cangay || ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, cangay: event.target.value });
+            }}
           />
           <label htmlFor="duration">
             Tiền sử sử dụng rượu bia, chè, chất kích thích ( tần suất, lượng… )
@@ -96,7 +132,10 @@ export default function Page() {
             type="text"
             id="duration"
             name="duration"
-            placeholder="Ví dụ: 3-4 phút"
+            value={formFields?.duration || ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, duration: event.target.value });
+            }}
             className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
           />
 
@@ -107,8 +146,12 @@ export default function Page() {
             type="text"
             id="spread"
             name="spread"
-            placeholder="Ví dụ: Ăn mấy bữa một ngày, có đủ no không?"
             className="w-full bg-zinc-200 h-fit min-h-12 rounded-md px-2"
+            value={formFields?.spread || ""}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormFields({ ...formFields, spread: event.target.value });
+              router.push("/patients/create/history/family");
+            }}
           />
 
           <button
