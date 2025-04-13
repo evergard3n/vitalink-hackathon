@@ -1,4 +1,5 @@
 Source code of Team VitaLink - Havard Medical Hackathon 2025, Vietnam
+This is the stable chanel, the development channel is minh-2.
 
 To run the application locally, do the following steps:
 1. cd into /chatbot-be folder, create a new virtual environment (conda is recommended)
