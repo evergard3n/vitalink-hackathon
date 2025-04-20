@@ -29,9 +29,14 @@ export const  WebSocketProvider = ({
   const [formContent, setFormContent] = useState();
   const { user } =  useUser();
   useEffect(() => {
-    if(!user) return;
+    let currUserId;
+    if(!user) {
+      currUserId = "user_2vJYbR2uDp3KEt4viA74JzoCjNI"
+    } else {
+      currUserId = user.id
+    };
     const getMessages = async () => {
-      const response = await fetch(`https://${process.env.NEXT_PUBLIC_BACKEND_URL}/api/history/${user.id}`);
+      const response = await fetch(`https://${process.env.NEXT_PUBLIC_BACKEND_URL}/api/history/${currUserId}`);
       if(!response) return;
       const data = await response.json();
       if(!data.chat_history) return;
